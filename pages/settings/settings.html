@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Academic Report Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body class="dashboard-body">
+
+    <aside class="dash-sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i> Report<strong>Assist</strong>
+        </div>
+        <nav class="side-nav">
+            <a href="../dashboard/dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i> My Projects</a>
+            <a href="../templates/templates.html" class="nav-item"><i class="fa-solid fa-layer-group"></i> Templates</a>
+            
+            <a href="../settings/settings.html" class="nav-item active"><i class="fa-solid fa-gear"></i> Settings</a>
+        </nav>
+        <div class="user-card">
+            <img src="https://ui-avatars.com/api/?name=Student+User&background=3b82f6&color=fff" alt="User">
+            <div class="user-info">
+                
+                 <a href="../profile/profile.html" class="user-profile-anchor" title="View Profile"><span class="name">Student User</span></a>
+                
+                 <span class="role" >Premium Account</span>
+            </div>
+        
+    </aside>
+
+    <main class="dash-content">
+        <header class="dash-header">
+            <div class="header-info">
+                <h1>Report Settings</h1>
+                <p>Configure project metadata and document formatting defaults.</p>
+            </div>
+            <button class="btn btn-primary" onclick="saveSettings()">
+                <i class="fa-solid fa-check"></i> Save Changes
+            </button>
+        </header>
+
+        <div class="settings-container">
+            <section class="settings-card">
+                <div class="card-title">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3>General Information</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Report Title</label>
+                        <input type="text" placeholder="e.g. Design and Implementation of AI System">
+                    </div>
+                    <div class="form-group">
+                        <label>Author Name</label>
+                        <input type="text" placeholder="Your Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Academic Year</label>
+                        <select>
+                            <option>2023/2024</option>
+                            <option selected>2024/2025</option>
+                            <option>2025/2026</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="settings-card">
+                <div class="card-title">
+                    <i class="fa-solid fa-university"></i>
+                    <h3>Academic Institution</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>University / School Name</label>
+                        <input type="text" placeholder="e.g. Faculty of Sciences">
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <input type="text" placeholder="e.g. Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label>Supervisor Name</label>
+                        <input type="text" placeholder="Prof. Jane Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Institution Logo</label>
+                        <div class="file-upload">
+                            <i class="fa-solid fa-image"></i>
+                            <span>Upload Logo</span>
+                            <input type="file" hidden id="logo-upload">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="settings-card">
+                <div class="card-title">
+                    <i class="fa-solid fa-font"></i>
+                    <h3>Typography & Style</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Main Font</label>
+                        <select>
+                            <option>Times New Roman (Academic Standard)</option>
+                            <option>Arial</option>
+                            <option>Merriweather</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Line Spacing</label>
+                        <select>
+                            <option>1.0</option>
+                            <option selected>1.5</option>
+                            <option>2.0</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+<script src="../auth.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    checkLogin();
+  });
+</script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        gsap.from(".settings-card", {
+            duration: 0.5,
+            x: 20,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+
+        function saveSettings() {
+            alert("Settings saved successfully! These changes will be applied to your auto-generated cover page.");
+        }
+    </script>
+</body>
+</html>

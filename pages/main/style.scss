@@ -1,0 +1,613 @@
+/* =========================================
+   1. SETUP & VARIABLES
+   ========================================= */
+
+/* Import Fonts: Serif for reading, Script for accents, Mono for UI elements */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Courier+Prime:wght@400;700&family=Mrs+Saint+Delafield&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+$font-ui: 'Courier Prime', monospace;       /* For buttons, labels, sidebars */
+$font-body: 'Crimson Text', serif;          /* For the main writing area */
+$font-display: 'Cinzel', serif;             /* For titles and headers */
+$font-hand: 'Mrs Saint Delafield', cursive; /* For signatures or accents */
+
+/* Color Palette - Vintage Ephemera */
+$paper-cream: #f4e4bc;
+$paper-white: #fdfbf7;
+$paper-dark: #e6d6b0;
+$ink-black: #2b2b2b;
+$ink-faded: #4a4a4a;
+$sepia-dark: #5c4b36;
+$accent-red: #8b3a3a; /* Wax seal red */
+$accent-gold: #c5a059;
+
+/* Textures (Using CSS gradients to simulate grain/noise if images fail) */
+@mixin texture-grain {
+  background-color: $paper-dark;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.2)),
+    url("https://www.transparenttextures.com/patterns/cream-paper.png");
+}
+
+@mixin shadow-floating {
+  box-shadow: 2px 5px 15px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.1);
+}
+
+@mixin shadow-deep {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* =========================================
+   2. GLOBAL RESET & BASE
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: $font-ui;
+  color: $ink-black;
+  @include texture-grain;
+  overflow: hidden; /* App-style layout */
+}
+
+/* Scrollbar Styling - Vintage Minimal */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: $sepia-dark;
+  border-radius: 4px;
+}
+
+/* =========================================
+   3. NAVBAR (The Leather Binding)
+   ========================================= */
+.navbar {
+  height: 60px;
+  background: #2c241b; /* Dark leather color */
+  border-bottom: 2px solid $accent-gold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  color: $paper-cream;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  z-index: 10;
+  position: relative;
+
+  .logo a {
+    font-family: $font-display;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: $accent-gold;
+    
+    i { margin-right: 8px; }
+  }
+
+  .nav-central-links {
+    display: flex;
+    gap: 20px;
+    
+    .nav-link {
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+      
+      &:hover { color: $accent-gold; }
+    }
+  }
+
+  .doc-title {
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.3);
+    padding: 5px 15px;
+    border-radius: 2px;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+
+    .badge {
+      background: $accent-red;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      margin-right: 10px;
+      border-radius: 2px;
+      font-family: $font-display;
+    }
+
+    .title-input {
+      background: transparent;
+      border: none;
+      color: $paper-cream;
+      font-family: $font-ui;
+      font-size: 0.95rem;
+      width: 250px;
+      
+      &:focus { outline: none; border-bottom: 1px solid $paper-cream; }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* Buttons styled like typewriter keys or stamps */
+    .btn {
+      padding: 6px 12px;
+      border-radius: 2px;
+      font-family: $font-ui;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid $paper-cream;
+      color: $paper-cream;
+      
+      &:hover { background: rgba(255,255,255,0.1); }
+    }
+
+    .btn-primary {
+      background: $paper-cream;
+      color: $sepia-dark;
+      border: 1px solid $paper-cream;
+      
+      &:hover { background: white; }
+    }
+
+    .avatar-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid $accent-gold;
+      filter: sepia(0.5);
+    }
+  }
+}/* =========================================
+   SIDEBAR NAV ANCHORS (Registry Tabs)
+   ========================================= */
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 2rem;
+
+  .nav-item {
+    text-decoration: none;
+    color: rgba(224, 213, 193, 0.7); // Faded parchment color
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.9rem;
+    padding: 12px 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    letter-spacing: 0.5px;
+
+    i {
+      font-size: 1rem;
+      color: $accent-gold;
+      opacity: 0.8;
+    }
+
+    /* The "Hover" effect - looks like a highlighted ledger line */
+    &:hover {
+      color: $paper-cream;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid $accent-gold;
+      padding-left: 20px; // Subtle slide effect
+    }
+
+    /* The "Active" state - looks like a red ink stamp */
+    &.active {
+      color: #fff;
+      background: rgba($accent-red, 0.15);
+      border: 1px dashed $accent-red;
+      
+      i {
+        color: $accent-red;
+        opacity: 1;
+      }
+
+      &::after {
+        content: 'SELECTED';
+        position: absolute;
+        right: 10px;
+        font-size: 0.5rem;
+        color: $accent-red;
+        border: 1px solid $accent-red;
+        padding: 1px 3px;
+        transform: rotate(-10deg);
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+/* Specific Style for the User Profile Anchor if it's in the sidebar */
+.user-profile-anchor {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-top: auto; // Pushes to bottom
+  border-top: 1px double $sepia-light;
+
+  .name {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    color: $accent-gold;
+    font-size: 1rem;
+  }
+
+  &:hover .name {
+    text-decoration: underline;
+    color: $paper-cream;
+  }
+}
+
+/* =========================================
+   4. LAYOUT CONTAINER
+   ========================================= */
+.main-container {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+/* =========================================
+   5. SIDEBAR (The Index Cards)
+   ========================================= */
+.sidebar {
+  width: 280px;
+  background: $paper-dark;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: inset -5px 0 15px rgba(0,0,0,0.05);
+
+  .sidebar-section {
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid $ink-black;
+      padding-bottom: 5px;
+
+      h3 {
+        font-family: $font-display;
+        font-size: 0.9rem;
+        margin: 0;
+        color: $sepia-dark;
+        text-transform: uppercase;
+      }
+
+      .icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $sepia-dark;
+        &:hover { color: $accent-red; }
+      }
+    }
+  }
+
+  /* List Items modeled after handwritten lists */
+  .section-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .section-item {
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: $ink-faded;
+      cursor: pointer;
+      border-bottom: 1px dashed rgba(92, 75, 54, 0.2);
+      transition: all 0.2s;
+      position: relative;
+
+      a { text-decoration: none; color: inherit; }
+
+      &:hover {
+        color: $ink-black;
+        padding-left: 5px;
+      }
+
+      /* The "Active" state looks like a circled selection */
+      &.active {
+        font-weight: bold;
+        color: $sepia-dark;
+        
+        &::before {
+          content: '•';
+          position: absolute;
+          left: -15px;
+          color: $accent-red;
+        }
+      }
+    }
+  }
+
+  /* Media Grid - Polaroids */
+  .media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    .media-item-thumb {
+      background: white;
+      padding: 4px 4px 15px 4px; /* Polaroid bottom */
+      box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+      transform: rotate(-2deg);
+      transition: transform 0.2s;
+      cursor: pointer;
+
+      img { width: 100%; height: auto; display: block; filter: sepia(0.3); }
+
+      &:nth-child(even) { transform: rotate(2deg); }
+      &:hover { transform: scale(1.1) rotate(0deg); z-index: 5; }
+    }
+
+    .add-new {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed $sepia-dark;
+      background: transparent;
+      color: $sepia-dark;
+      min-height: 60px;
+    }
+  }
+}
+
+/* =========================================
+   6. MAIN EDITOR (The Desk & Paper)
+   ========================================= */
+.editor-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Subtle blueprint grid background */
+  background-image: linear-gradient(rgba(43, 43, 43, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(43, 43, 43, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-color: #dcd0b8; /* Slightly darker than paper */
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  padding: 10px 2rem;
+  font-size: 0.8rem;
+  color: $ink-faded;
+  opacity: 0.7;
+
+  a { text-decoration: none; color: inherit; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom: 1px solid $ink-black; }
+  .current { font-weight: bold; color: $sepia-dark; }
+}
+
+/* Toolbar - Mechanical / Typewriter style */
+.toolbar {
+  padding: 10px 2rem;
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+
+  .tool-group {
+    display: flex;
+    gap: 5px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+
+    &:last-child { border: none; }
+  }
+
+  .tool-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #bba;
+    background: #eee;
+    border-radius: 50%; /* Typewriter keys */
+    font-size: 0.9rem;
+    color: #333;
+    box-shadow: 0 2px 0 #999, 0 3px 3px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 #999, inset 0 2px 5px rgba(0,0,0,0.2);
+    }
+  }
+
+  .special-tools .tool-btn {
+    width: auto;
+    border-radius: 4px; /* Rectangular labels */
+    padding: 0 10px;
+    font-family: $font-ui;
+    font-size: 0.8rem;
+  }
+}
+
+/* The Paper Sheet */
+.paper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  
+  #editor {
+    width: 100%;
+    max-width: 800px;
+    min-height: 1000px; /* A4-ish height */
+    background: $paper-white;
+    padding: 3rem 4rem;
+    font-family: $font-body;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: $ink-black;
+    @include shadow-deep;
+    
+    /* Paper Texture Overlay */
+    background-image: url("https://www.transparenttextures.com/patterns/white-paper.png");
+    
+    &:focus { outline: none; }
+
+    /* Content Styling inside Editor */
+    h2 {
+      font-family: $font-display;
+      border-bottom: 2px solid $ink-black;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    p { margin-bottom: 1.5rem; }
+
+    .editor-figure {
+      margin: 2rem 0;
+      text-align: center;
+      padding: 10px;
+      border: 1px dashed $sepia-dark;
+      background: rgba(0,0,0,0.02);
+
+      img { max-width: 100%; height: auto; mix-blend-mode: multiply; }
+      figcaption {
+        font-family: $font-ui;
+        font-size: 0.85rem;
+        margin-top: 10px;
+        color: $sepia-dark;
+      }
+    }
+  }
+}
+
+/* Footer Status Bar */
+.editor-status {
+  background: $paper-dark;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding: 5px 2rem;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  color: $ink-faded;
+  font-style: italic;
+  
+  .status-left span { margin-right: 15px; }
+}
+
+/* =========================================
+   7. MODAL (Telegram / Note Card style)
+   ========================================= */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 36, 27, 0.8); /* Dark backdrop */
+  backdrop-filter: blur(2px);
+
+  .modal-content {
+    background: $paper-cream;
+    margin: 10% auto;
+    padding: 0;
+    width: 500px;
+    border: 1px solid $sepia-dark;
+    @include shadow-deep;
+    position: relative;
+    
+    /* "Taped" corners effect could go here */
+
+    .modal-header {
+      background: $sepia-dark;
+      color: $paper-cream;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 { margin: 0; font-family: $font-display; font-size: 1.1rem; }
+      .close { cursor: pointer; font-size: 1.5rem; &:hover { color: $accent-red; } }
+    }
+
+    .modal-body {
+      padding: 20px;
+
+      textarea {
+        width: 100%;
+        height: 100px;
+        background: rgba(255,255,255,0.5);
+        border: 2px solid $ink-black;
+        padding: 10px;
+        font-family: 'Courier Prime', monospace;
+        font-size: 1rem;
+        resize: none;
+        
+        &:focus { outline: none; background: white; }
+      }
+
+      .latex-preview {
+        margin-top: 15px;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border: 1px dashed #ccc;
+        color: #666;
+        font-style: italic;
+      }
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+      background: rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+
+      button {
+        padding: 8px 16px;
+        cursor: pointer;
+        font-family: $font-ui;
+        font-weight: bold;
+      }
+      
+      .btn-primary {
+        background: $ink-black;
+        color: white;
+        border: none;
+        &:hover { background: $accent-red; }
+      }
+      
+      .btn-outline {
+        background: transparent;
+        border: 1px solid $ink-black;
+      }
+    }
+  }
+}
