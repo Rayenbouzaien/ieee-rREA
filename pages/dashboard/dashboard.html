@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Academic Report Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <aside class="dash-sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i> Report<strong>Assist</strong>
+        </div>
+        <nav class="side-nav">
+            <a href="../dashboard/dashboard.html" class="nav-item active"><i class="fa-solid fa-house"></i> My Projects</a>
+            <a href="../templates/templates.html" class="nav-item"><i class="fa-solid fa-layer-group"></i> Templates</a>
+            
+            <a href="../settings/settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        </nav>
+        <div class="user-card">
+            <img src="https://ui-avatars.com/api/?name=Student+User&background=3b82f6&color=fff" alt="User">
+            <div class="user-info">
+                
+                 <a href="../profile/profile.html" class="user-profile-anchor" title="View Profile"><span class="name">Student User</span></a>
+                
+                 <span class="role" >Premium Account</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="dash-content">
+        <header class="dash-header">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search your reports...">
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="location.href='../main/index.html'">
+                    <i class="fa-solid fa-plus"></i> New Report
+                </button>
+            </div>
+        </header>
+
+        <section class="projects-section">
+            <div class="section-title">
+                <h2>Recent Projects</h2>
+                <div class="view-toggle">
+                    <i class="fa-solid fa-grip"></i>
+                    <i class="fa-solid fa-list"></i>
+                </div>
+            </div>
+
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="card-header">
+                        <span class="badge badge-pfe">PFE</span>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>AI System Design</h3>
+                        <p>Last edited 2 hours ago</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-text">75% Complete</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="../main/projet.html" class="btn-open">Open Editor <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-header">
+                        <span class="badge badge-intern">Internship</span>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Web Development Report</h3>
+                        <p>Last edited yesterday</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-text">30% Complete</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="../main/projet.html" class="btn-open">Open Editor <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card add-card" onclick="location.href='../main/projet.html'">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <span>Create New Report</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        gsap.from(".project-card", {
+    duration: 0.8,
+    y: 50,              // Slightly more travel for a "lifted" feel
+    rotation: -5,       // Start with a slight tilt
+    opacity: .2,
+    stagger: {
+        amount: 0.5,    // Total time to distribute the stagger
+        from: "start"
+    },
+    ease: "back.out(1.7)", // Adds a slight "bounce" as if hitting the desk
+});
+document.querySelectorAll('.project-card').forEach(card => {
+  let hoverAnim = gsap.to(card, { 
+    scale: 1.05, 
+    rotation: 0, 
+    opacity: 1, 
+    duration: 0.3, 
+    ease: "power1.out", 
+    paused: true 
+  });
+
+  card.addEventListener('mouseenter', () => hoverAnim.play());
+  card.addEventListener('mouseleave', () => hoverAnim.reverse());
+});
+
+
+    </script>
+   
+
+</body>
+</html>

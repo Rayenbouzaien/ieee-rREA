@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Report Assistant | Editor</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../dashboard/dashboard.html" style="text-decoration: none; color: inherit;">
+                <i class="fa-solid fa-graduation-cap"></i> Report<strong>Assist</strong>
+            </a>
+        </div>
+
+        <div class="nav-central-links">
+            <a href="../dashboard/dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a href="../templates/templates.html" class="nav-link"><i class="fa-solid fa-layer-group"></i> Templates</a>
+            
+        
+        <div class="doc-title">
+            <span id="report-type-badge" class="badge">PFE Report</span>
+            <input type="text" value="Design and Implementation of AI System" class="title-input">
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-outline"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+            <button class="btn btn-primary" onclick="exportPDF()"><i class="fa-solid fa-file-export"></i> Export</button>
+           
+            <a href="../profile/profile.html" class="user-profile-anchor" title="View Profile" id="user-profile" style="display: none;">
+                <img src="https://ui-avatars.com/api/?name=Student+User&background=3b82f6&color=fff" alt="User Avatar" class="avatar-img">
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                </div>
+                <ul class="section-list">
+                    <li class="section-item">
+                        <a href="../dashboard/dashboard.html"><i class="fa-solid fa-arrow-left"></i> Exit to Dashboard</a>
+                    </li>
+                    <li class="section-item">
+                        <a href="../settings/settings.html"><i class="fa-solid fa-gear"></i> Report Settings</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <h3><i class="fa-solid fa-list-ul"></i> Outline</h3>
+                    <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <ul class="section-list">
+                    <li class="section-item active" onclick="loadSection(0)">Abstract</li>
+                    <li class="section-item" onclick="loadSection(1)">Introduction</li>
+                    <li class="section-item" onclick="loadSection(2)">Literature Review</li>
+                    <li class="section-item" onclick="loadSection(3)">Methodology</li>
+                    <li class="section-item" onclick="loadSection(4)">Conclusion</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <h3><i class="fa-solid fa-images"></i> Media Assets</h3>
+                </div>
+                <div class="media-grid">
+                    <div class="media-item-thumb" title="Architecture Diagram">
+                        <img src="https://picsum.photos/100/100?random=1" alt="Diag">
+                    </div>
+                    <div class="media-item-thumb" title="Result Chart">
+                        <img src="https://picsum.photos/100/100?random=2" alt="Chart">
+                    </div>
+                    <div class="media-item-thumb add-new" title="Upload New Media">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="user-card">
+            <img src="https://ui-avatars.com/api/?name=Student+User&background=3b82f6&color=fff" alt="User">
+            <div class="user-info">
+                
+                 <a href="../profile/profile.html" class="user-profile-anchor" title="View Profile"><span class="name">Student User</span></a>
+                
+                 <span class="role" >Premium Account</span>
+            </div>
+            <button class="btn btn-outline logout-btn" onclick="logout()">Logout</button>
+        </div>
+            <div class="sidebar-footer">
+                <a href="help.html"><i class="fa-solid fa-circle-question"></i> Help & Shortcuts</a>
+            </div>
+        </aside>
+
+        <main class="editor-wrapper">
+            
+            <div class="breadcrumbs">
+                <a href="../dashboard/dashboard.html">Projects</a> <i class="fa-solid fa-chevron-right"></i> 
+                <a href="#">PFE 2025</a> <i class="fa-solid fa-chevron-right"></i> 
+                <span class="current">Introduction</span>
+            </div>
+
+            <div class="toolbar">
+                <div class="tool-group">
+                    <button class="tool-btn" onclick="formatDoc('bold')"><i class="fa-solid fa-bold"></i></button>
+                    <button class="tool-btn" onclick="formatDoc('italic')"><i class="fa-solid fa-italic"></i></button>
+                    <button class="tool-btn" onclick="formatDoc('underline')"><i class="fa-solid fa-underline"></i></button>
+                </div>
+                <div class="tool-group">
+                    <button class="tool-btn" onclick="formatDoc('formatBlock', 'H2')"><i class="fa-solid fa-heading"></i></button>
+                    <button class="tool-btn" onclick="formatDoc('insertUnorderedList')"><i class="fa-solid fa-list-ul"></i></button>
+                </div>
+                <div class="tool-group special-tools">
+                    <button class="tool-btn" onclick="openLatexModal()"><i class="fa-solid fa-square-root-variable"></i> LaTeX</button>
+                    <button class="tool-btn"><i class="fa-solid fa-image"></i> Image</button>
+                    <button class="tool-btn"><i class="fa-solid fa-table"></i> Table</button>
+                </div>
+            </div>
+
+            <div class="paper">
+                <div id="editor" contenteditable="true" spellcheck="false">
+                    <h2>1. Introduction</h2>
+                    <p>The field of research has seen significant growth in recent years. This section outlines the primary objectives of the study...</p>
+                    
+                    <figure class="editor-figure" contenteditable="false">
+                        <img src="https://picsum.photos/600/300?random=3" alt="Flowchart">
+                        <figcaption>Figure 1.1: Project Development Workflow</figcaption>
+                    </figure>
+
+                    <p>As shown in the figure above, the workflow is divided into three distinct phases...</p>
+                </div>
+            </div>
+
+            <footer class="editor-status">
+                <div class="status-left">
+                    <span><i class="fa-solid fa-pen-nib"></i> Words: 1,240</span>
+                    <span><i class="fa-solid fa-clock"></i> Reading time: 5m</span>
+                </div>
+                <div class="status-right">
+                    <span class="save-status"><i class="fa-solid fa-cloud-check"></i> Autosaved at 14:35</span>
+                </div>
+            </footer>
+            
+        </main>
+    </div>
+
+    <div id="latex-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Insert Mathematical Formula</h3>
+                <span class="close" onclick="closeLatexModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <textarea id="latex-input" placeholder="Enter LaTeX code here (e.g., E=mc^2)"></textarea>
+                <div class="latex-preview" id="latex-preview">Preview will appear here...</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeLatexModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="insertLatex()">Insert Equation</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

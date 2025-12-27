@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates | Academic Report Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="templates.css">
+</head>
+<body class="dashboard-body">
+
+    <aside class="dash-sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i> Report<strong>Assist</strong>
+        </div>
+        <nav class="side-nav">
+            <a href="../dashboard/dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i> My Projects</a>
+            <a href="../templates/templates.html" class="nav-item active"><i class="fa-solid fa-layer-group"></i> Templates</a>
+            
+            <a href="../settings/settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        </nav>
+        <div class="user-card">
+            <img src="https://ui-avatars.com/api/?name=Student+User&background=3b82f6&color=fff" alt="User">
+            <div class="user-info">
+                
+                 <a href="../profile/profile.html" class="user-profile-anchor" title="View Profile"><span class="name">Student User</span></a>
+                
+                 <span class="role" >Premium Account</span>
+            </div>
+    </aside>
+
+    <main class="dash-content">
+        <header class="dash-header">
+            <div class="header-info">
+                <h1>Report Templates</h1>
+                <p>Select a structure to jumpstart your academic writing.</p>
+            </div>
+        </header>
+
+        <div class="filter-tabs">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Engineering</button>
+            <button class="filter-btn">Business</button>
+            <button class="filter-btn">Science</button>
+        </div>
+
+        <div class="template-grid">
+            <div class="template-card" onclick="startWithTemplate('pfe')">
+                <div class="template-preview">
+                    
+                    <div class="hover-overlay">
+                        <button class="btn btn-primary">Use This Template</button>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>PFE / Master Thesis</h3>
+                    <p>Standard structure for final year engineering projects.</p>
+                    <ul class="template-tags">
+                        <li><i class="fa-solid fa-check"></i> Literature Review</li>
+                        <li><i class="fa-solid fa-check"></i> Methodology</li>
+                        <li><i class="fa-solid fa-check"></i> BibTeX Ready</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="template-card" onclick="startWithTemplate('internship')">
+                <div class="template-preview">
+                    
+                    <div class="hover-overlay">
+                        <button class="btn btn-primary">Use This Template</button>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Internship Report</h3>
+                    <p>Focused on professional experience and company analysis.</p>
+                    <ul class="template-tags">
+                        <li><i class="fa-solid fa-check"></i> Company Profile</li>
+                        <li><i class="fa-solid fa-check"></i> Task Journal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="template-card" onclick="startWithTemplate('research')">
+                <div class="template-preview">
+                    
+                    <div class="hover-overlay">
+                        <button class="btn btn-primary">Use This Template</button>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>IEEE Scientific Paper</h3>
+                    <p>Double-column format for journal submissions.</p>
+                    <ul class="template-tags">
+                        <li><i class="fa-solid fa-check"></i> Abstract</li>
+                        <li><i class="fa-solid fa-check"></i> IEEE Citation Style</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+<script src="../auth.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    checkLogin();
+  });
+</script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+       gsap.from(".template-card", {
+        duration: 0.6,
+        scale: 0.7,
+        y: 20,
+        opacity: .5,
+        stagger: 0.15,
+        ease: "power2.out"
+    });
+
+    // 2. Hover effect for interactivity
+    gsap.utils.toArray(".template-card").forEach(card => {
+        card.addEventListener("mouseenter", () => {
+            gsap.to(card, {  opacity :1 ,scale: 1.05, y: -5, duration: 0.2, ease: "power1.out" });
+        });
+        card.addEventListener("mouseleave", () => {
+            gsap.to(card, { opacity:0.3 ,scale: 1, y: 0, duration: 0.2, ease: "power1.out" });
+        });
+    });
+
+    // 3. Click to start template with exit animation
+    function startWithTemplate(type, cardElement) {
+        console.log("Initializing " + type + " template...");
+
+        // Animate all cards: fade and lift out
+        gsap.to(".template-card", {
+            duration: 0.4,
+            scale: 0.9,
+            opacity: .7,
+            y: -20,
+            stagger: 0.1,
+            ease: "power1.in",
+            onComplete: () => {
+                window.location.href = 'index.html?template=' + type;
+            }
+        });
+        }
+    </script>
+</body>
+</html>

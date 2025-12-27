@@ -1,0 +1,570 @@
+@charset "UTF-8";
+/* =========================================
+   1. SETUP & VARIABLES
+   ========================================= */
+/* Import Fonts: Serif for reading, Script for accents, Mono for UI elements */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Courier+Prime:wght@400;700&family=Mrs+Saint+Delafield&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap");
+/* For buttons, labels, sidebars */
+/* For the main writing area */
+/* For titles and headers */
+/* For signatures or accents */
+/* Color Palette - Vintage Ephemera */
+/* Wax seal red */
+/* Textures (Using CSS gradients to simulate grain/noise if images fail) */
+/* =========================================
+   2. GLOBAL RESET & BASE
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Courier Prime", monospace;
+  color: #2b2b2b;
+  background-color: #e6d6b0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)), url("https://www.transparenttextures.com/patterns/cream-paper.png");
+  overflow: hidden; /* App-style layout */
+}
+
+/* Scrollbar Styling - Vintage Minimal */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5c4b36;
+  border-radius: 4px;
+}
+
+/* =========================================
+   3. NAVBAR (The Leather Binding)
+   ========================================= */
+.navbar {
+  height: 60px;
+  background: #2c241b; /* Dark leather color */
+  border-bottom: 2px solid #c5a059;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  color: #f4e4bc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  position: relative;
+}
+.navbar .logo a {
+  font-family: "Cinzel", serif;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  color: #c5a059;
+}
+.navbar .logo a i {
+  margin-right: 8px;
+}
+.navbar .nav-central-links {
+  display: flex;
+  gap: 20px;
+}
+.navbar .nav-central-links .nav-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+.navbar .nav-central-links .nav-link:hover {
+  color: #c5a059;
+}
+.navbar .doc-title {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 15px;
+  border-radius: 2px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+.navbar .doc-title .badge {
+  background: #8b3a3a;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  margin-right: 10px;
+  border-radius: 2px;
+  font-family: "Cinzel", serif;
+}
+.navbar .doc-title .title-input {
+  background: transparent;
+  border: none;
+  color: #f4e4bc;
+  font-family: "Courier Prime", monospace;
+  font-size: 0.95rem;
+  width: 250px;
+}
+.navbar .doc-title .title-input:focus {
+  outline: none;
+  border-bottom: 1px solid #f4e4bc;
+}
+.navbar .actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Buttons styled like typewriter keys or stamps */
+}
+.navbar .actions .btn {
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-family: "Courier Prime", monospace;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.navbar .actions .btn-outline {
+  background: transparent;
+  border: 1px solid #f4e4bc;
+  color: #f4e4bc;
+}
+.navbar .actions .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.navbar .actions .btn-primary {
+  background: #f4e4bc;
+  color: #5c4b36;
+  border: 1px solid #f4e4bc;
+}
+.navbar .actions .btn-primary:hover {
+  background: white;
+}
+.navbar .actions .avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #c5a059;
+  filter: sepia(0.5);
+}
+
+/* =========================================
+   4. LAYOUT CONTAINER
+   ========================================= */
+.main-container {
+  display: flex;
+  height: calc(100vh - 60px);
+ 
+}
+
+/* =========================================
+   5. SIDEBAR (The Index Cards)
+   ========================================= */
+.sidebar {
+  width: 280px;
+  background: #e6d6b0;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.05);
+  /* List Items modeled after handwritten lists */
+  /* Media Grid - Polaroids */
+}
+.sidebar .sidebar-section .sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  border-bottom: 2px solid #2b2b2b;
+  padding-bottom: 5px;
+}
+.sidebar .sidebar-section .sidebar-header h3 {
+  font-family: "Cinzel", serif;
+  font-size: 0.9rem;
+  margin: 0;
+  color: #5c4b36;
+  text-transform: uppercase;
+}
+.sidebar .sidebar-section .sidebar-header .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #5c4b36;
+}
+.sidebar .sidebar-section .sidebar-header .icon-btn:hover {
+  color: #8b3a3a;
+}
+.sidebar .section-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar .section-list .section-item {
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(92, 75, 54, 0.2);
+  transition: all 0.2s;
+  position: relative;
+  /* The "Active" state looks like a circled selection */
+}
+.sidebar .section-list .section-item a {
+  text-decoration: none;
+  color: inherit;
+}
+.sidebar .section-list .section-item:hover {
+  color: #2b2b2b;
+  padding-left: 5px;
+}
+.sidebar .section-list .section-item.active {
+  font-weight: bold;
+  color: #5c4b36;
+}
+.sidebar .section-list .section-item.active::before {
+  content: "•";
+  position: absolute;
+  left: -15px;
+  color: #8b3a3a;
+}
+.sidebar .media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.sidebar .media-grid .media-item-thumb {
+  background: white;
+  padding: 4px 4px 15px 4px; /* Polaroid bottom */
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  transform: rotate(-2deg);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.sidebar .media-grid .media-item-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: sepia(0.3);
+}
+.sidebar .media-grid .media-item-thumb:nth-child(even) {
+  transform: rotate(2deg);
+}
+.sidebar .media-grid .media-item-thumb:hover {
+  transform: scale(1.1) rotate(0deg);
+  z-index: 5;
+}
+.sidebar .media-grid .add-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #5c4b36;
+  background: transparent;
+  color: #5c4b36;
+  min-height: 60px;
+}
+
+/* =========================================
+   6. MAIN EDITOR (The Desk & Paper)
+   ========================================= */
+.editor-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-image: radial-gradient(#000 1px, transparent 0); /* Dot grid pattern on desk */
+  background-size: 20px 20px;
+  background-color: #dcd0b8; /* Slightly darker than paper */
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  padding: 10px 2rem;
+  font-size: 0.8rem;
+  color: #4a4a4a;
+  opacity: 0.7;
+}
+.breadcrumbs a {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid transparent;
+}
+.breadcrumbs a:hover {
+  border-bottom: 1px solid #2b2b2b;
+}
+.breadcrumbs .current {
+  font-weight: bold;
+  color: #5c4b36;
+}
+
+/* Toolbar - Mechanical / Typewriter style */
+.toolbar {
+  padding: 10px 2rem;
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.toolbar .tool-group {
+  display: flex;
+  gap: 5px;
+  padding-right: 15px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.toolbar .tool-group:last-child {
+  border: none;
+}
+.toolbar .tool-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #bba;
+  background: #eee;
+  border-radius: 50%; /* Typewriter keys */
+  font-size: 0.9rem;
+  color: #333;
+  box-shadow: 0 2px 0 #999, 0 3px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+}
+.toolbar .tool-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #999, inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.toolbar .special-tools .tool-btn {
+  width: auto;
+  border-radius: 4px; /* Rectangular labels */
+  padding: 0 10px;
+  font-family: "Courier Prime", monospace;
+  font-size: 0.8rem;
+}
+
+/* The Paper Sheet */
+.paper {
+  flex: 1;
+  overflow: auto;
+  padding: 2rem;
+  display: auto;
+  justify-content: center;
+}
+.paper #editor {
+  width: 100%;
+  max-width: 800px;
+  min-height: 1000px; /* A4-ish height */
+  background: #fdfbf7;
+  padding: 3rem 4rem;
+  font-family: "Crimson Text", serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #2b2b2b;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  /* Paper Texture Overlay */
+  background-image: url("https://www.transparenttextures.com/patterns/white-paper.png");
+  /* Content Styling inside Editor */
+}
+.paper #editor:focus {
+  outline: none;
+}
+.paper #editor h2 {
+  font-family: "Cinzel", serif;
+  border-bottom: 2px solid #2b2b2b;
+  padding-bottom: 10px;
+  margin-top: 0;
+}
+.paper #editor p {
+  margin-bottom: 1.5rem;
+}
+.paper #editor .editor-figure {
+  margin: 2rem 0;
+  text-align: center;
+  padding: 10px;
+  border: 1px dashed #5c4b36;
+  background: rgba(0, 0, 0, 0.02);
+}
+.paper #editor .editor-figure img {
+  max-width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+.paper #editor .editor-figure figcaption {
+  font-family: "Courier Prime", monospace;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  color: #5c4b36;
+}
+
+/* Footer Status Bar */
+.editor-status {
+  background: #e6d6b0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px 2rem;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  color: #4a4a4a;
+  font-style: italic;
+}
+.editor-status .status-left span {
+  margin-right: 15px;
+}
+
+/* =========================================
+   7. MODAL (Telegram / Note Card style)
+   ========================================= */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 36, 27, 0.8); /* Dark backdrop */
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.modal .modal-content {
+  background: #f4e4bc;
+  margin: 10% auto;
+  padding: 0;
+  width: 500px;
+  border: 1px solid #5c4b36;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  position: relative;
+  /* "Taped" corners effect could go here */
+}
+.modal .modal-content .modal-header {
+  background: #5c4b36;
+  color: #f4e4bc;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal .modal-content .modal-header h3 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+}
+.modal .modal-content .modal-header .close {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.modal .modal-content .modal-header .close:hover {
+  color: #8b3a3a;
+}
+.modal .modal-content .modal-body {
+  padding: 20px;
+}
+.modal .modal-content .modal-body textarea {
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid #2b2b2b;
+  padding: 10px;
+  font-family: "Courier Prime", monospace;
+  font-size: 1rem;
+  resize: none;
+}
+.modal .modal-content .modal-body textarea:focus {
+  outline: none;
+  background: white;
+}
+.modal .modal-content .modal-body .latex-preview {
+  margin-top: 15px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px dashed #ccc;
+  color: #666;
+  font-style: italic;
+}
+.modal .modal-content .modal-footer {
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.modal .modal-content .modal-footer button {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: "Courier Prime", monospace;
+  font-weight: bold;
+}
+.modal .modal-content .modal-footer .btn-primary {
+  background: #2b2b2b;
+  color: white;
+  border: none;
+}
+.modal .modal-content .modal-footer .btn-primary:hover {
+  background: #8b3a3a;
+}
+.modal .modal-content .modal-footer .btn-outline {
+  background: transparent;
+  border: 1px solid #2b2b2b;
+}
+
+/* Form Styles for Auth Modals */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.form-group label {
+  font-family: "Cinzel", serif;
+  font-size: 0.75rem;
+  color: #5c4b36;
+  font-weight: bold;
+}
+.form-group input[type=text], .form-group input[type=password] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #5c4b36;
+  padding: 10px 5px;
+  font-family: "Crimson Text", serif;
+  font-size: 1.1rem;
+  color: #2b2b2b;
+  transition: border-color 0.3s;
+}
+.form-group input[type=text]:focus, .form-group input[type=password]:focus {
+  outline: none;
+  border-bottom: 2px solid #c5a059;
+  background: rgba(197, 160, 89, 0.05);
+}
+.form-group button[type=submit] {
+  padding: 10px 20px;
+  background: #2b2b2b;
+  color: white;
+  border: none;
+  font-family: "Courier Prime", monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.form-group button[type=submit]:hover {
+  background: #8b3a3a;
+}
+
+/* Logout Button Styling */
+.logout-btn {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid #c5a059;
+  color: #c5a059;
+  font-family: "Courier Prime", monospace;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.logout-btn:hover {
+  background: #c5a059;
+  color: #2c241b;
+}/*# sourceMappingURL=style.css.map */
